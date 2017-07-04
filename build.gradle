@@ -1,0 +1,67 @@
+buildscript {
+    ext {
+        assertJ = '3.8.0'
+        junit = '4.12'
+        spock = '1.1-groovy-2.4'
+        groovy = '2.4.12'
+        jmh = '1.19'
+        gradlePlugin = '1.6.3'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("com.ofg:uptodate-gradle-plugin:${gradlePlugin}")
+    }
+}
+
+plugins {
+    id "me.champeau.gradle.jmh" version "0.4.3"
+}
+
+allprojects {
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    group 'sorting-katas'
+    version '1.0'
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'com.ofg.uptodate'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    compile("org.openjdk.jmh:jmh-core:${jmh}")
+    compile("org.openjdk.jmh:jmh-generator-annprocess:${jmh}")
+    compile("org.openjdk.jmh:jmh-generator-bytecode:${jmh}")
+
+    testCompile("junit:junit:${junit}")
+    testCompile("org.codehaus.groovy:groovy-all:${groovy}")
+    testCompile("org.spockframework:spock-core:${spock}")
+    testCompile("org.assertj:assertj-core:${assertJ}")
+}
+
+jmh {
+    jmhVersion = '1.19'
+    iterations = 2
+    fork = 2
+    duplicateClassesStrategy = 'EXCLUDE'
+    humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt")
+    resultsFile = project.file("${project.buildDir}/reports/jmh/results.txt")
+    include = ['.*SortBenchmark.*']
+    resultFormat = 'JSON'
+    verbosity = 'NORMAL'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
