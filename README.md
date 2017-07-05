@@ -1,5 +1,5 @@
 ## CI Build
-[![Build Status](https://travis-ci.org/mabrod/sort-katas.svg?branch=master)](https://travis-ci.org/mabrod/sort-katas)
+[![Build Status](https://https://github.com/mabrod/algo-katas.svg?branch=master)](https://github.com/mabrod/algo-katas)
 I use Travis CI to run CI build pipeline: https://travis-ci.org/
 
 ## Learning Sorting algorithms
