@@ -16,11 +16,8 @@ buildscript {
     }
     dependencies {
         classpath("com.ofg:uptodate-gradle-plugin:${gradlePlugin}")
+        classpath("me.champeau.gradle:jmh-gradle-plugin:0.4.4")
     }
-}
-
-plugins {
-    id "me.champeau.gradle.jmh" version "0.4.3"
 }
 
 allprojects {
@@ -35,6 +32,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
     apply plugin: 'com.ofg.uptodate'
+    apply plugin: "me.champeau.gradle.jmh"
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
